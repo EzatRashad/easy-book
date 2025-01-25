@@ -11,6 +11,8 @@ class ServerFailure extends Failure {
 
   factory ServerFailure.fromDioError(DioException dioError) {
     switch (dioError.type) {
+      // Handle Connection DioExceptions
+      
       case DioExceptionType.connectionTimeout:
         return ServerFailure('Connection timeout with the API server');
 
@@ -19,7 +21,8 @@ class ServerFailure extends Failure {
 
       case DioExceptionType.receiveTimeout:
         return ServerFailure('Receive timeout with the API server');
-
+      // Handle DioExceptions with response
+       
       case DioExceptionType.badResponse:
         return ServerFailure.fromResponse(
           dioError.response?.statusCode,
@@ -41,6 +44,7 @@ class ServerFailure extends Failure {
     }
   }
 
+// Handle DioExceptions with response data by status code
   factory ServerFailure.fromResponse(int? statusCode, dynamic response) {
     if (statusCode == null) {
       return ServerFailure('Unknown error occurred. Please try again.');

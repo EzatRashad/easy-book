@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:mvvm_bookly/Features/home/data/home_repo/home_repo.dart';
 import 'package:mvvm_bookly/Features/home/data/model/book_model.dart';
 import 'package:mvvm_bookly/core/failure/failure.dart';
@@ -19,7 +20,11 @@ class HomeRepoImpl extends HomeRepo {
       }
       return Right(books);
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      if (e is DioException) {
+        return Left(ServerFailure(e.toString()));
+      } else {
+        return Left(ServerFailure(e.toString()));
+      }
     }
   }
 
@@ -35,7 +40,11 @@ class HomeRepoImpl extends HomeRepo {
       }
       return Right(books);
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      if (e is DioException) {
+        return Left(ServerFailure(e.toString()));
+      } else {
+        return Left(ServerFailure(e.toString()));
+      }
     }
   }
 }
