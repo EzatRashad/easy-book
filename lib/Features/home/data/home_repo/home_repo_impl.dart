@@ -7,9 +7,11 @@ import 'package:mvvm_bookly/core/utils/api_service.dart';
 class HomeRepoImpl extends HomeRepo {
   late final ApiService _apiService;
   @override
-  Future<Either<Failure, List<BookModel>>> fetchNewestBooks()async {
+  Future<Either<Failure, List<BookModel>>> fetchNewestBooks() async {
     try {
-          var data=await _apiService.get(endPoint: 'volumes?q=programming&Filtering=free-ebooks&sorting=newest');
+      var data = await _apiService.get(
+          endPoint:
+              'volumes?q=programming&Filtering=free-ebooks&sorting=newest');
 
       List<BookModel> books = [];
       for (var item in data['items']) {
@@ -18,13 +20,22 @@ class HomeRepoImpl extends HomeRepo {
       return Right(books);
     } catch (e) {
       return Left(ServerFailure(e.toString()));
-     }
+    }
   }
 
   @override
-  Future<Either<Failure, List<BookModel>>> fetchFeaturedBooks() {
-    _apiService.get(endPoint: '');
-    throw UnimplementedError();
+  Future<Either<Failure, List<BookModel>>> fetchFeaturedBooks() async {
+    try {
+      var data = await _apiService.get(
+          endPoint: 'volumes?q=programming&Filtering=free-ebooks');
+
+      List<BookModel> books = [];
+      for (var item in data['items']) {
+        books.add(BookModel.fromJson(item));
+      }
+      return Right(books);
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
   }
- 
 }
