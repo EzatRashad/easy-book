@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mvvm_bookly/Features/home/presentation/views/home_view.dart';
 import 'package:mvvm_bookly/core/utils/AppColors.dart';
 import 'package:mvvm_bookly/core/utils/utils.dart';
 
@@ -15,7 +17,7 @@ class CustomBookDetailsAppBar extends StatelessWidget {
       snap: true,
       leading: GestureDetector(
         onTap: () {
-          Navigator.pop(context);
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeView()));
         },
         child: Icon(
           FontAwesomeIcons.arrowLeft,

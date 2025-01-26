@@ -6,13 +6,14 @@ import 'package:mvvm_bookly/core/failure/failure.dart';
 import 'package:mvvm_bookly/core/utils/api_service.dart';
 
 class HomeRepoImpl extends HomeRepo {
+  HomeRepoImpl(this._apiService);
   late final ApiService _apiService;
   @override
   Future<Either<Failure, List<BookModel>>> fetchNewestBooks() async {
     try {
       var data = await _apiService.get(
           endPoint:
-              'volumes?q=programming&Filtering=free-ebooks&sorting=newest');
+              'volumes?q=programming&Filtering=free-ebooks&sorting=oldest');
 
       List<BookModel> books = [];
       for (var item in data['items']) {
@@ -32,7 +33,7 @@ class HomeRepoImpl extends HomeRepo {
   Future<Either<Failure, List<BookModel>>> fetchFeaturedBooks() async {
     try {
       var data = await _apiService.get(
-          endPoint: 'volumes?q=programming&Filtering=free-ebooks');
+          endPoint: 'volumes?q=general&Filtering=free-ebooks');
 
       List<BookModel> books = [];
       for (var item in data['items']) {

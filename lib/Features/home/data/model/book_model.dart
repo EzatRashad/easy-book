@@ -183,34 +183,118 @@ class Epub {
   }
 }
 
-/// country : "EG"
-/// saleability : "NOT_FOR_SALE"
-/// isEbook : false
+
 
 class SaleInfo {
   SaleInfo({
     this.country,
     this.saleability,
     this.isEbook,
+    this.listPrice,
+    this.retailPrice,
+    this.buyLink,
+    this.offers,
   });
 
-  SaleInfo.fromJson(dynamic json) {
+  SaleInfo.fromJson(Map<String, dynamic> json) {
     country = json['country'];
     saleability = json['saleability'];
     isEbook = json['isEbook'];
+    listPrice = json['listPrice'] != null
+        ? Price.fromJson(json['listPrice'])
+        : null;
+    retailPrice = json['retailPrice'] != null
+        ? Price.fromJson(json['retailPrice'])
+        : null;
+    buyLink = json['buyLink'];
+    if (json['offers'] != null) {
+      offers = List<Offer>.from(json['offers'].map((x) => Offer.fromJson(x)));
+    }
   }
+
   String? country;
   String? saleability;
   bool? isEbook;
+  Price? listPrice;
+  Price? retailPrice;
+  String? buyLink;
+  List<Offer>? offers;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['country'] = country;
     map['saleability'] = saleability;
     map['isEbook'] = isEbook;
+    if (listPrice != null) {
+      map['listPrice'] = listPrice!.toJson();
+    }
+    if (retailPrice != null) {
+      map['retailPrice'] = retailPrice!.toJson();
+    }
+    map['buyLink'] = buyLink;
+    if (offers != null) {
+      map['offers'] = offers!.map((x) => x.toJson()).toList();
+    }
     return map;
   }
 }
+
+class Price {
+  Price({
+    this.amount,
+    this.currencyCode,
+  });
+
+  Price.fromJson(Map<String, dynamic> json) {
+    amount = json['amount'];
+    currencyCode = json['currencyCode'];
+  }
+
+  double? amount;
+  String? currencyCode;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['amount'] = amount;
+    map['currencyCode'] = currencyCode;
+    return map;
+  }
+}
+
+class Offer {
+  Offer({
+    this.finskyOfferType,
+    this.listPrice,
+    this.retailPrice,
+  });
+
+  Offer.fromJson(Map<String, dynamic> json) {
+    finskyOfferType = json['finskyOfferType'];
+    listPrice = json['listPrice'] != null
+        ? Price.fromJson(json['listPrice'])
+        : null;
+    retailPrice = json['retailPrice'] != null
+        ? Price.fromJson(json['retailPrice'])
+        : null;
+  }
+
+  int? finskyOfferType;
+  Price? listPrice;
+  Price? retailPrice;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['finskyOfferType'] = finskyOfferType;
+    if (listPrice != null) {
+      map['listPrice'] = listPrice!.toJson();
+    }
+    if (retailPrice != null) {
+      map['retailPrice'] = retailPrice!.toJson();
+    }
+    return map;
+  }
+}
+
 
 /// title : "Programming in C, 3e"
 /// authors : ["Kamthane"]

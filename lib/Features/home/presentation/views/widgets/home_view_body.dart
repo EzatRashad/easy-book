@@ -3,7 +3,7 @@ import 'package:mvvm_bookly/core/utils/utils.dart';
 
 import '../../../../../core/utils/app_images.dart';
 import 'package:flutter/material.dart';
-import 'best_seller_list_view.dart';
+import 'newest_list_view.dart';
 import 'custom_app_bar.dart';
 import 'featured_list_view.dart';
 
@@ -37,7 +37,7 @@ class HomeViewBody extends StatelessWidget {
             ),
           ),
           const SliverFillRemaining(
-            child: BestSellerListView(),
+            child: NewestBooksListView(),
           ),
         ],
       ),

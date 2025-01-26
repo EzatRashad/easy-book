@@ -28,22 +28,28 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  cached_network_image: null
   cupertino_icons: ^1.0.8
   dartz: ^0.10.1
   dio: ^5.7.0
-  dots_indicator: ^3.0.0
+  dots_indicator: null
   flutter:
     sdk: flutter
-  flutter_animated_splash: ^0.0.10
-  flutter_bloc: ^9.0.0
+  flutter_animated_splash: null
+  flutter_bloc: null
   flutter_localizations:
     sdk: flutter
-  flutter_screenutil: ^5.9.3
-  flutter_svg: ^2.0.17
+  flutter_screenutil: null
+  flutter_svg: null
   font_awesome_flutter: null
+  get_it: null
   go_router: null
   google_fonts: null
-  smooth_page_indicator: ^1.2.0+3
+  hive_flutter: ^1.1.0
+  shimmer: null
+  smooth_page_indicator: null
+  url_launcher: null
+  path_provider: null
 
 dev_dependencies:
   flutter_lints: ^4.0.0

@@ -2,18 +2,18 @@ import 'package:mvvm_bookly/Features/home/data/model/book_model.dart';
 
 abstract class NewestBooksStates {}
 
-class NewesBoxInitial extends NewestBooksStates {}
+class NewesBooksInitial extends NewestBooksStates {}
 
-class NewesBoxLoading extends NewestBooksStates {}
+class NewesBooksLoading extends NewestBooksStates {}
 
-class NewesBoxSuccess extends NewestBooksStates {
-  final List<BookModel> featureBoxes;
+class NewesBooksSuccess extends NewestBooksStates {
+  final List<BookModel> newestBooks;
 
-  NewesBoxSuccess(this.featureBoxes);
+  NewesBooksSuccess(this.newestBooks);
 }
 
-class NewesBoxError extends NewestBooksStates {
+class NewesBooksError extends NewestBooksStates {
   final String message;
 
-  NewesBoxError(this.message);
+  NewesBooksError(this.message);
 }

@@ -3,14 +3,14 @@ import 'package:mvvm_bookly/Features/home/presentation/manager/feature_books_cub
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FeatureBooksCubit extends Cubit<FeatureBooksStates> {
-  FeatureBooksCubit(this.homeRepo) : super(FeatureBoxInitial());
+  FeatureBooksCubit(this.homeRepo) : super(FeatureBooksInitial());
   final HomeRepo homeRepo;
   Future<void> getFeatureBooks() async {
-    emit(FeatureBoxLoading());
+    emit(FeatureBooksLoading());
     var response = await homeRepo.fetchFeaturedBooks();
     response.fold(
-      (failure) => emit(FeatureBoxError(failure.errorMessage)),
-      (books) => emit(FeatureBoxSuccess(books)),
+      (failure) => emit(FeatureBooksError(failure.errorMessage)),
+      (books) => emit(FeatureBooksSuccess(books)),
     );
   }
 }

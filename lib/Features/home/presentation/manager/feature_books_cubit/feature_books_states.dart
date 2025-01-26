@@ -2,18 +2,18 @@ import 'package:mvvm_bookly/Features/home/data/model/book_model.dart';
 
 abstract class FeatureBooksStates {}
 
-class FeatureBoxInitial extends FeatureBooksStates {}
+class FeatureBooksInitial extends FeatureBooksStates {}
 
-class FeatureBoxLoading extends FeatureBooksStates {}
+class FeatureBooksLoading extends FeatureBooksStates {}
 
-class FeatureBoxSuccess extends FeatureBooksStates {
-  final List<BookModel> featureBoxes;
+class FeatureBooksSuccess extends FeatureBooksStates {
+  final List<BookModel> featureBooks;
 
-  FeatureBoxSuccess(this.featureBoxes);
+  FeatureBooksSuccess(this.featureBooks);
 }
 
-class FeatureBoxError extends FeatureBooksStates {
+class FeatureBooksError extends FeatureBooksStates {
   final String message;
 
-  FeatureBoxError(this.message);
+  FeatureBooksError(this.message);
 }
