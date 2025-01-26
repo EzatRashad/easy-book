@@ -1,33 +1,33 @@
 
 import 'package:hive_flutter/adapters.dart';
-import 'package:mvvm_bookly/Features/home/data/model/book_model.dart';
-
+import 'package:mvvm_bookly/Features/favorites/data/model/favorites_model.dart';
+ 
 class HiveServices {
   static const String favBooks = 'favBooks';
 
-static Future<void> addItem({required BookModel book}) async {
-  final box = Hive.box<BookModel>(favBooks);
+static Future<void> addItem({required FavoritesBookModel book}) async {
+  final box = Hive.box<FavoritesBookModel>(favBooks);
 
   await box.put(book.id, book);
 }
 
 
-static List<BookModel> getItems() {
-  final box = Hive.box<BookModel>(favBooks);
+static List<FavoritesBookModel> getItems() {
+  final box = Hive.box<FavoritesBookModel>(favBooks);
 
   final result = box.values.toList();
   return result;
 }
 
 
-  static Future<void> deleteItem(int id) async {
-    final box = Hive.box<BookModel>(favBooks);
+  static Future<void> deleteItem(String id) async {
+    final box = Hive.box<FavoritesBookModel>(favBooks);
     await box.delete(id);
 
   }
 
   static Future<void> clearAllItems() async {
-    final box = Hive.box<BookModel>(favBooks);
+    final box = Hive.box<FavoritesBookModel>(favBooks);
     await box.clear();
   }
 

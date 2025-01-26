@@ -23,7 +23,7 @@ class NewestBooksListView extends StatelessWidget {
             'Popular books',
             style: Styles.textStyle18,
           ),
-                  20.ph,
+                  10.ph,
         BlocBuilder<NewestBooksCubit,NewestBooksStates>(builder: (context, state) {
           if (state is NewesBooksError) {
             return CustomErrorWidget(errorMessage: state.message);
@@ -63,7 +63,7 @@ class NewestBooksListView extends StatelessWidget {
                         );
           }
         },),
-        ],
+         ],
       ),
     );
   }

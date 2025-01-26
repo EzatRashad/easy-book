@@ -16,16 +16,7 @@ class TopWidget extends StatefulWidget {
 }
 
 class _TopWidgetState extends State<TopWidget> {
-  bool load = true;
-  @override
-  void initState() {
-    Future.delayed(const Duration(milliseconds:700), () {
-      setState(() {
-        load = false;
-      });
-    });
-    super.initState();
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -40,17 +31,7 @@ class _TopWidgetState extends State<TopWidget> {
                 aspectRatio: 3 / 1,
                 child: Padding(
                   padding: const EdgeInsets.all(15.0),
-                  child:   load
-                          ? Shimmer.fromColors(
-                          baseColor: Colors.grey[300]!,
-                          highlightColor: Colors.grey[100]!,
-                          child: Container(
-                              height: 130,
-                              width: 90,
-                            color: Colors.white,
-                          ),
-                        )
-                          : Row(
+                  child: Row(
                     children: [
                     Container(
                               height: 130,

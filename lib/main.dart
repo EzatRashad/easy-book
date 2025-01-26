@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:mvvm_bookly/Features/favorites/data/model/favorites_model.dart';
+import 'package:mvvm_bookly/Features/favorites/manager/favorites_cubit/favorites_cubit.dart';
 import 'package:mvvm_bookly/Features/home/data/home_repo/home_repo_impl.dart';
-import 'package:mvvm_bookly/Features/home/data/model/book_model.dart';
 import 'package:mvvm_bookly/Features/home/presentation/manager/newest_books_cubit/newest_books_cubit.dart';
 import 'package:mvvm_bookly/Features/search/data/search_repo_impl.dart';
 import 'package:mvvm_bookly/core/utils/AppColors.dart';
@@ -23,10 +24,11 @@ import 'core/utils/api_service.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setup();
-  Bloc.observer = SimpleBlocObserver(); 
-    final document = await getApplicationDocumentsDirectory();
+  Bloc.observer = SimpleBlocObserver();
+  final document = await getApplicationDocumentsDirectory();
   await Hive.initFlutter(document.path);
-  await Hive.openBox<BookModel>(HiveServices.favBooks);
+  Hive.registerAdapter(FavoritesBookModelAdapter());
+  await Hive.openBox<FavoritesBookModel>(HiveServices.favBooks);
   runApp(const Bookly());
 }
 
@@ -52,7 +54,14 @@ class Bookly extends StatelessWidget {
                   getIt.get<HomeRepoImpl>(),
                 )..getNewestBooks(),
               ),
-              BlocProvider(create:(context) =>  SearchCubit(SearchRepoImpl(ApiService(Dio())),),),
+              BlocProvider(
+                create: (context) => SearchCubit(
+                  SearchRepoImpl(ApiService(Dio())),
+                ),
+              ),
+              BlocProvider(
+                create: (context) => FavoritesCubit()..getFavorites() ,
+              ),
             ],
             child: MaterialApp.router(
               localizationsDelegates: const [

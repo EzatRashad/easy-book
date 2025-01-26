@@ -31,7 +31,7 @@ class HomeViewBody extends StatelessWidget {
                 30.ph,
                 
                 const FeaturedBooksListView(),
-                60.ph,
+                45.ph,
                 
               ],
             ),
